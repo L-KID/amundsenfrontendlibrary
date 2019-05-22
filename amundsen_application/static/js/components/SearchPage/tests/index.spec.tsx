@@ -32,7 +32,6 @@ import globalState from 'fixtures/globalState';
 
 describe('SearchPage', () => {
   const setStateSpy = jest.spyOn(SearchPage.prototype, 'setState');
-
   const setup = (propOverrides?: Partial<SearchPageProps>) => {
     const props: SearchPageProps = {
       searchTerm: globalState.search.search_term,
@@ -43,7 +42,11 @@ describe('SearchPage', () => {
       searchAll: jest.fn(),
       searchResource: jest.fn(),
       getPopularTables: jest.fn(),
-      ...propOverrides
+      history: jest.fn() as any,
+      location: jest.fn() as any,
+      match: jest.fn() as any,
+      staticContext: jest.fn() as any,
+      ...propOverrides,
     };
     const wrapper = shallow<SearchPage>(<SearchPage {...props} />)
     return { props, wrapper };
